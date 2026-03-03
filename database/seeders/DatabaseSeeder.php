@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Watch;
+use App\Http\Controllers\WatchController;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,9 +20,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Watch::factory()->create([
+            'model_name' => 'Onyx Stealth',
+            'serial_number' => 'SN-TEST-0001',
+            'price' => 1000.00,
+            'is_active' => true,
+            'slug' => 'test-watch',
         ]);
     }
 }

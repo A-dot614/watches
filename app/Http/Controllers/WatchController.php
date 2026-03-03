@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\Watch;
+use App\Models\User;
+use Illuminate\Support\Str;
+use App\Http\Controllers\WatchController;
+use Illuminate\Http\Request;
+
+class WatchController extends Controller
+{
+public function home()
+    {
+        return view('site.home');
+    }
+
+    public function detail(Watch $okatia)
+    {
+        return view('site.detail', compact('okatia'));
+    }
+    
+    public function collection()
+    {
+        $allWatches = Watch::all();
+        return view('site.collection',compact('allWatches'));
+    }
+    
+    public function contact()
+    {
+        return view('site.contact');
+    }
+
+    public function about()
+    {
+        return view('site.about');
+    }
+}
