@@ -9,7 +9,31 @@
                 Add New Piece
             </a>
         </div>
-
+@if(session('success'))
+<div class="mb-8 animate-in fade-in slide-in-from-top duration-700">
+    <div class="relative bg-emerald-500/5 border border-emerald-500/20 p-4 overflow-hidden">
+        <div class="absolute left-0 top-0 h-full w-1 bg-emerald-500"></div>
+        
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-[10px] uppercase tracking-[0.3em] text-emerald-500 font-bold leading-none mb-1">Entry Confirmed</p>
+                    <p class="text-stone-300 text-xs font-light tracking-wide">{{ session('success') }}</p>
+                </div>
+            </div>
+            
+            <div class="hidden sm:block opacity-10">
+                <span class="text-4xl font-serif italic text-white">Success</span>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
         <div class="grid grid-cols-1 gap-4">
             <div class="hidden md:grid grid-cols-12 px-6 py-4 text-[10px] uppercase tracking-[0.3em] text-stone-500 font-bold border-b border-white/10">
                 <div class="col-span-2">Model</div>
@@ -65,14 +89,14 @@
                                 </svg>
                             </a>
                             
-                            <!-- <form action="#" method="POST" onsubmit="return confirm('Archive this piece from the collection?');">
+                            <form action="#" method="POST" onsubmit="return confirm('Archive this piece from the collection?');">
                                 
                                 <button type="submit" class="p-2 border border-white/10 text-stone-400 hover:text-red-500 hover:bg-red-500/10 transition">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                 </button>
-                            </form> -->
+                            </form> 
                         </div>
                     </div>
                     <div class="absolute bottom-0 left-0 h-[1px] w-0 bg-amber-500 group-hover:w-full transition-all duration-700"></div>

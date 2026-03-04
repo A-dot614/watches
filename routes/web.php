@@ -30,7 +30,7 @@ Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['au
 Route::get('/card', [AdminController::class,'card'])->name('card');
 Route::get('/carddetail',[AdminController::class,'adminDetail'] )->name('admin.detail');
 Route::get('/index', [AdminController::class,'adminIndex'])->name('admin.index');
-Route::post('/postWatches', [AdminController::class,'postWatches'])->name('postWatches');
+Route::post('/card', [AdminController::class, 'store'])->name('card');
 Route::get('/create', [AdminController::class,'create'])->name('create');
 
 

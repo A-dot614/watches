@@ -23,9 +23,9 @@
                     </div>
                     
                     <div class="flex items-center gap-3">
-                        <button type="reset" form="watch-form" class="px-5 py-3 text-[10px] font-black text-white bg-transparent border border-white/20 hover:bg-white hover:text-black transition-all uppercase tracking-[0.2em]">
+                        <!-- <button type="reset" form="watch-form" class="px-5 py-3 text-[10px] font-black text-white bg-transparent border border-white/20 hover:bg-white hover:text-black transition-all uppercase tracking-[0.2em]">
                             Discard
-                        </button>
+                        </button> -->
                         <button form="watch-form" type="submit" class="px-8 py-3 text-[10px] font-black text-black bg-yellow-400 hover:bg-yellow-500 shadow-[0_0_20px_rgba(250,204,21,0.2)] active:scale-95 transition-all uppercase tracking-[0.2em]">
                             Publish Product
                         </button>
@@ -33,8 +33,9 @@
                 </div>
             </div>
 
-            <form id="watch-form" action="#" method="POST" class="grid grid-cols-1 lg:grid-cols-3 gap-10 pb-20">
-                
+            <form id="watch-form" action="{{ route('card') }}" method="POST" class="grid grid-cols-1 lg:grid-cols-3 gap-10 pb-20">
+                @csrf
+
                 <div class="lg:col-span-2 space-y-10">
                     
                     <div class="bg-zinc-900 p-8 rounded-none border border-white/5 relative shadow-2xl">
@@ -46,27 +47,39 @@
                         <div class="space-y-6">
                             <div>
                                 <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Product Model Name</label>
-                                <input type="text" placeholder="CHRONO-MAX GOLD EDITION" required
+                                <input type="text" name="model_name" placeholder="CHRONO-MAX GOLD EDITION" required
                                     class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all placeholder:text-zinc-700">
+                                 @error('model_name')
+                                  <div class="text-red-600">{{ $message }}</div>
+                                 @enderror
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Series</label>
-                                    <input type="text" placeholder="Prestige Line"
+                                    <input type="text" name="series" placeholder="Prestige Line"
                                         class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all placeholder:text-zinc-700">
+                                    @error('series')
+                                        <div class="text-red-600">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div>
                                     <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Reference SKU</label>
-                                    <input type="text" placeholder="REF-9920-GLD"
+                                    <input type="text" name="series" placeholder="REF-9920-GLD"
                                         class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all placeholder:text-zinc-700">
+                                    @error('series')
+                                        <div class="text-red-600">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Craftsmanship Description</label>
-                                <textarea rows="6" placeholder="Detail the movement, crystal, and materials..."
+                                <textarea rows="6" name="description" placeholder="Detail the movement, crystal, and materials..."
                                     class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all resize-none placeholder:text-zinc-700"></textarea>
+                                @error('description')
+                                    <div class="text-red-600">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -82,22 +95,31 @@
                                 <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Retail Price</label>
                                 <div class="relative">
                                     <span class="absolute left-5 top-4 text-yellow-400 font-bold">$</span>
-                                    <input type="number" step="0.01" placeholder="0.00"
+                                    <input type="number" name="" step="0.01" placeholder="0.00"
                                         class="w-full pl-10 pr-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 outline-none transition-all font-mono">
+                                    @error('')
+                                        <div class="text-red-600">{{ $message }}</div>
+                                    @enderror    
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Internal Cost</label>
                                 <div class="relative">
                                     <span class="absolute left-5 top-4 text-zinc-500 font-bold">$</span>
-                                    <input type="number" step="0.01" placeholder="0.00"
+                                    <input type="number" name="" step="0.01" placeholder="0.00"
                                         class="w-full pl-10 pr-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 outline-none transition-all font-mono">
+                                    @error('')
+                                        <div class="text-red-600">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Vault Quantity</label>
-                                <input type="number" placeholder="12"
+                                <input type="number" name="" placeholder="12"
                                     class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 outline-none transition-all font-mono">
+                                @error('')
+                                    <div class="text-red-600">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -115,7 +137,10 @@
                                 <p class="text-[10px] text-white font-black uppercase tracking-widest">Upload Master Image</p>
                                 <p class="text-[9px] text-zinc-600 mt-2 uppercase">Max size: 25MB</p>
                             </div>
-                            <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" />
+                            <input type="file" name="" class="absolute inset-0 opacity-0 cursor-pointer" />
+                                    @error('')
+                                        <div class="text-red-600">{{ $message }}</div>
+                                    @enderror                            
                         </div>
                     </div>
 
@@ -123,14 +148,7 @@
                         <h3 class="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] mb-5">Classification</h3>
                         
                         <div class="space-y-6">
-                            <div>
-                                <label class="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2">Collection</label>
-                                <select class="w-full px-4 py-3 bg-black border border-zinc-800 text-white rounded-none outline-none focus:border-yellow-400 transition-all appearance-none cursor-pointer text-xs uppercase font-bold tracking-widest">
-                                    <option>Heritage Luxury</option>
-                                    <option>Modern Sport</option>
-                                    <option>Rare Finds</option>
-                                </select>
-                            </div>
+
 
                             <div>
                                 <label class="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-3">Market Visibility</label>
