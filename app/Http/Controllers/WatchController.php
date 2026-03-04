@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Watch;
-use App\Models\User;
-use Illuminate\Support\Str;
-use App\Http\Controllers\WatchController;
 use Illuminate\Http\Request;
 
 class WatchController extends Controller

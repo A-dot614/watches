@@ -13,66 +13,59 @@
     </div>
 
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-<div class="group relative bg-stone-900 border border-white/5 overflow-hidden transition-all duration-700 hover:shadow-[0_0_30px_rgba(217,119,6,0.1)] hover:border-amber-500/40">
-    @if($allWatches->isNotEmpty())
+        @if($allWatches->isNotEmpty())
+            @foreach($allWatches as $item)
+                <div class="group relative bg-stone-900 border border-white/5 overflow-hidden transition-all duration-700 hover:shadow-[0_0_30px_rgba(217,119,6,0.1)] hover:border-amber-500/40">
+                    <div class="absolute top-4 right-4 z-20 flex flex-col items-end space-y-2">
+                        <div class="bg-white/5 backdrop-blur-md border border-white/10 text-[7px] font-medium uppercase tracking-[0.2em] px-2 py-1 text-stone-400">
+                            {{ $item->series }}
+                        </div>
+                    </div>
 
-    @foreach($allWatches as $item)
-    <div class="absolute top-4 right-4 z-20 flex flex-col items-end space-y-2">
-        <div class="bg-white/5 backdrop-blur-md border border-white/10 text-[7px] font-medium uppercase tracking-[0.2em] px-2 py-1 text-stone-400">
-            {{ $item->series }}
-        </div>
-    </div>
+                    <div class="h-80 w-full flex items-center justify-center bg-stone-950 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(0,0,0,0.6)_100%)]"></div>
+                        
+                        <div class="animate-float transition-transform duration-700 group-hover:scale-110">
+                            <img src="{{ $item->image_url }}" alt="{{ $item->name }}" class="w-44 h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]">
+                        </div>
 
-    <div class="h-80 w-full flex items-center justify-center bg-stone-950 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(0,0,0,0.6)_100%)]"></div>
-        
-        <div class="animate-float transition-transform duration-700 group-hover:scale-110">
-            <img src="{{ $item->image_url }}" alt="{{ $item->name }}" class="w-44 h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]">
-        </div>
+                        <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-black/40 backdrop-blur-xl p-3 border-t border-white/10 flex justify-center space-x-4">
+                            <span class="text-[8px] text-amber-500 uppercase tracking-widest">{{ $item->case_material }}</span>
+                            <span class="text-[8px] text-stone-400 uppercase tracking-widest">•</span>
+                            <span class="text-[8px] text-amber-500 uppercase tracking-widest">{{ $item->water_resistance }}</span>
+                            <span class="text-[8px] text-stone-400 uppercase tracking-widest">•</span>
+                            <span class="text-[8px] text-amber-500 uppercase tracking-widest">{{ $item->movement_type }}</span>
+                        </div>
+                    </div>
 
-        <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-black/40 backdrop-blur-xl p-3 border-t border-white/10 flex justify-center space-x-4">
-            <span class="text-[8px] text-amber-500 uppercase tracking-widest">{{ $item->material }}</span>
-            <span class="text-[8px] text-stone-400 uppercase tracking-widest">•</span>
-            <span class="text-[8px] text-amber-500 uppercase tracking-widest">{{ $item->water_resistance }}</span>
-            <span class="text-[8px] text-stone-400 uppercase tracking-widest">•</span>
-            <span class="text-[8px] text-amber-500 uppercase tracking-widest">{{ $item->movement }}</span>
-        </div>
-    </div>
+                    <div class="p-6 space-y-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-white text-xl font-light tracking-tighter uppercase">{{ $item->model_name }} <span class="italic font-serif text-stone-400 block text-sm mt-1">Onyx Stealth</span></h4>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-amber-500 font-serif text-lg tracking-tighter">${{ $item->price }}</span>
+                                <p class="text-[8px] text-stone-600 uppercase tracking-widest">Incl. Duties</p>
+                            </div>
+                        </div>
 
-    <div class="p-6 space-y-6">
-        <div class="flex justify-between items-start">
-            <div>
-                <h4 class="text-white text-xl font-light tracking-tighter uppercase">{{ $item->model_name }} <span class="italic font-serif text-stone-400 block text-sm mt-1">Onyx Stealth</span></h4>
-            </div>
-            <div class="text-right">
-                <span class="text-amber-500 font-serif text-lg tracking-tighter">${{ $item->price }}</span>
-                <p class="text-[8px] text-stone-600 uppercase tracking-widest">Incl. Duties</p>
-            </div>
-        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <a href="{{ route('detail', $item->slug) }}" class="flex items-center justify-center py-3 border border-white/10 text-[9px] font-bold uppercase tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all duration-500">
+                                See Details
+                            </a>
+                            
+                            <button class="flex items-center justify-center py-3 bg-amber-600 text-white text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-amber-500 transition-all duration-500 shadow-lg shadow-amber-900/20 active:scale-95">
+                                Purchase
+                            </button>
+                        </div>
+                    </div>
 
-        <div class="grid grid-cols-2 gap-3">
-            <a href="{{ route('detail') }}" class="flex items-center justify-center py-3 border border-white/10 text-[9px] font-bold uppercase tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all duration-500">
-                See Details
-            </a>
-            
-            <button class="flex items-center justify-center py-3 bg-amber-600 text-white text-[9px] font-bold uppercase tracking-[0.2em] hover:bg-amber-500 transition-all duration-500 shadow-lg shadow-amber-900/20 active:scale-95">
-                Purchase
-            </button>
-        </div>
-    </div>
-
-    <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-amber-500 group-hover:w-full transition-all duration-1000"></div>
-</div>
-
-
-    @endforeach
-    @else
-        <p class="text-center text-stone-500 col-span-full">No watches available at the moment.</p>
-    @endif
-
-
-
+                    <div class="absolute bottom-0 left-0 h-[2px] w-0 bg-amber-500 group-hover:w-full transition-all duration-1000"></div>
+                </div>
+            @endforeach
+        @else
+            <p class="text-center text-stone-500 col-span-full">No watches available at the moment.</p>
+        @endif
     </div>
 </section>    
 </x-layouts.mainlayout>

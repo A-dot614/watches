@@ -8,7 +8,6 @@
             opacity: 0;
             animation: reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
-        /* Custom scrollbar for luxury feel */
         .custom-scrollbar::-webkit-scrollbar { width: 3px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #0c0a09; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #78716c; }
@@ -33,16 +32,17 @@
             <img src="{{ $okatia->image_url }}" alt="{{ $okatia->name }}" 
                  class="relative z-10 w-2/3 object-contain drop-shadow-[0_60px_70px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-1000 ease-out">
             
-            <div class="grid grid-cols-4 gap-4">
-                        @if($okatia->images->isNotEmpty())
-                            @foreach($okatia->images as $image)
-                            <button class="aspect-square bg-slate-900 rounded-2xl border border-white/5 overflow-hidden group relative">
-                                <div class="absolute inset-0 bg-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
-                                <img src="{{$image->image_url}}" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110">
-                            </button>
-                            @endforeach
-                        @endif    
-                    </div>
+            <div class="absolute bottom-24 z-20 grid grid-cols-4 gap-px bg-white/10 border border-white/10">
+                @if($okatia->images->isNotEmpty())
+                    @foreach($okatia->images as $image)
+                    <button class="w-16 h-16 bg-stone-950 overflow-hidden group relative outline-none">
+                        <div class="absolute inset-0 bg-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                        <img src="{{ $image->image_url }}" class="w-full h-full object-cover opacity-40 group-hover:opacity-100 transition-all duration-700">
+                        <div class="absolute bottom-0 left-0 w-0 h-[1px] bg-amber-500 group-hover:w-full transition-all duration-500 z-20"></div>
+                    </button>
+                    @endforeach
+                @endif    
+            </div>
 
             <div class="absolute bottom-12 left-12 flex items-center space-x-4 opacity-30">
                 <div class="h-[1px] w-12 bg-amber-500"></div>
@@ -65,11 +65,11 @@
                     <span class="text-amber-500 text-[10px] tracking-[0.5em] uppercase font-bold">Limited to 100 Pieces</span>
                 </div>
                 <h1 class="text-6xl md:text-8xl font-light mb-6 uppercase tracking-tighter leading-[0.85] text-white">
-                    Resistor <br>
-                    <span class="italic font-serif text-stone-500">Onyx Stealth</span>
+                    {{ $okatia->model_name }} <br>
+                    <span class="italic font-serif text-stone-500">{{ $okatia->series }}</span>
                 </h1>
                 <div class="flex items-center space-x-8 mt-8">
-                    <p class="text-4xl font-serif italic text-white">${{ $okatia->price }}</p>
+                    <p class="text-4xl font-serif italic text-white">${{ number_format($okatia->price) }}</p>
                     <div class="h-8 w-[1px] bg-white/10"></div>
                     <span class="text-[10px] uppercase tracking-[0.3em] text-stone-500">Global Priority Shipping</span>
                 </div>
@@ -77,25 +77,25 @@
 
             <div class="space-y-12 animate-reveal" style="animation-delay: 0.4s;">
                 <p class="text-stone-400 leading-relaxed text-lg font-light border-l border-amber-500/30 pl-8 max-w-xl">
-                    {{ $okatia->description }}<span class="text-white">Grade 5 Titanium</span> {{ $okatia->material }} case, <span class="text-white">Sapphire Crystal</span> {{ $okatia->crystal_type }}, <span class="text-white">300M Water Resistance</span> {{ $okatia->water_resistance }}, and an <span class="text-white">Automatic Movement</span> {{ $okatia->movement }}. Each piece is meticulously crafted to embody the essence of stealth and sophistication, making it a true collector's item for watch enthusiasts worldwide.
+                    {{ $okatia->description }} Constructed with a <span class="text-white">{{ $okatia->material }}</span> case, <span class="text-white">{{ $okatia->crystal_type }}</span>, <span class="text-white">{{ $okatia->water_resistance }}</span>, and powered by an <span class="text-white">{{ $okatia->movement }}</span> movement.
                 </p>
 
                 <div class="grid grid-cols-2 gap-y-12 gap-x-12 border-t border-white/5 pt-12">
                     <div class="group cursor-default">
                         <h4 class="text-[10px] uppercase tracking-[0.4em] text-stone-600 mb-3 group-hover:text-amber-500 transition">The Heart</h4>
-                        <p class="text-sm text-white font-medium italic">Automatic Caliber H-26 Anti-Magnetic</p>
+                        <p class="text-sm text-white font-medium italic">{{ $okatia->movement_type }}</p>
                     </div>
                     <div class="group cursor-default">
                         <h4 class="text-[10px] uppercase tracking-[0.4em] text-stone-600 mb-3 group-hover:text-amber-500 transition">The Shield</h4>
-                        <p class="text-sm text-white font-medium italic">Double-Domed Sapphire Crystal</p>
+                        <p class="text-sm text-white font-medium italic">{{ $okatia->crystal_type }}</p>
                     </div>
                     <div class="group cursor-default">
                         <h4 class="text-[10px] uppercase tracking-[0.4em] text-stone-600 mb-3 group-hover:text-amber-500 transition">Depth Rating</h4>
-                        <p class="text-sm text-white font-medium italic">30 ATM (300 Meters)</p>
+                        <p class="text-sm text-white font-medium italic">{{ $okatia->water_resistance }}</p>
                     </div>
                     <div class="group cursor-default">
-                        <h4 class="text-[10px] uppercase tracking-[0.4em] text-stone-600 mb-3 group-hover:text-amber-500 transition">Strap</h4>
-                        <p class="text-sm text-white font-medium italic">FKM Fluoroelastomer</p>
+                        <h4 class="text-[10px] uppercase tracking-[0.4em] text-stone-600 mb-3 group-hover:text-amber-500 transition">Case Material</h4>
+                        <p class="text-sm text-white font-medium italic">{{ $okatia->case_material }}</p>
                     </div>
                 </div>
 
