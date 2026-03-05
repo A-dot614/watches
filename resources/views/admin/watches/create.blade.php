@@ -4,13 +4,13 @@
             
             <div class="mb-10 border-b border-white/10 pb-10">
                 <div class="flex items-center gap-4 mb-6">
-                    <a href="javascript:history.back()" class="group flex items-center justify-center w-10 h-10 border border-white/10 hover:border-yellow-400 transition-all">
+                    <a href="{{ route('card') }}" class="group flex items-center justify-center w-10 h-10 border border-white/10 hover:border-yellow-400 transition-all">
                         <svg class="w-5 h-5 text-zinc-500 group-hover:text-yellow-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </a>
                     <nav class="flex items-center gap-2 text-sm text-zinc-500">
-                        <a href="#" class="hover:text-yellow-400 transition-colors uppercase tracking-widest text-[10px] font-black">Catalog</a>
+                        <a href="{{ route('card') }}" class="hover:text-yellow-400 transition-colors uppercase tracking-widest text-[10px] font-black">Catalog</a>
                         <span class="text-zinc-800">/</span>
                         <span class="text-zinc-300 font-medium uppercase tracking-widest text-[10px]">New Timepiece</span>
                     </nav>
@@ -23,9 +23,6 @@
                     </div>
                     
                     <div class="flex items-center gap-3">
-                        <!-- <button type="reset" form="watch-form" class="px-5 py-3 text-[10px] font-black text-white bg-transparent border border-white/20 hover:bg-white hover:text-black transition-all uppercase tracking-[0.2em]">
-                            Discard
-                        </button> -->
                         <button form="watch-form" type="submit" class="px-8 py-3 text-[10px] font-black text-black bg-yellow-400 hover:bg-yellow-500 shadow-[0_0_20px_rgba(250,204,21,0.2)] active:scale-95 transition-all uppercase tracking-[0.2em]">
                             Publish Product
                         </button>
@@ -54,21 +51,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Series</label>
-                        <input type="text" name="series" value="{{ old('series') }}" placeholder="Prestige Line"
+                        <input type="text" name="series" value="{{ old('series') }}" placeholder="Prestige Line" required
                             class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all placeholder:text-zinc-700">
                         @error('series') <div class="text-red-600 text-xs mt-1 uppercase font-bold">{{ $message }}</div> @enderror
                     </div>
-                    <!-- <div>
-                        <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">URL Slug / Unique SKU</label>
-                        <input type="text" name="slug" value="{{ old('slug') }}" placeholder="chrono-max-gold"
-                            class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all placeholder:text-zinc-700">
-                        @error('slug') <div class="text-red-600 text-xs mt-1 uppercase font-bold">{{ $message }}</div> @enderror
-                    </div> -->
                 </div>
 
                 <div>
                     <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Craftsmanship Description</label>
-                    <textarea rows="6" name="description" placeholder="Detail the movement, crystal, and materials..."
+                    <textarea rows="6" name="description" placeholder="Detail the movement, crystal, and materials..." required
                         class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition-all resize-none placeholder:text-zinc-700">{{ old('description') }}</textarea>
                     @error('description') <div class="text-red-600 text-xs mt-1 uppercase font-bold">{{ $message }}</div> @enderror
                 </div>
@@ -84,16 +75,18 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
                     <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Case Material</label>
-                    <input type="text" name="case_material" value="{{ old('case_material', 'Steel') }}"
+                    <input type="text" name="case_material" value="{{ old('case_material', 'Steel') }}" required
                         class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 outline-none transition-all">
+                    @error('case_material') <div class="text-red-600 text-xs mt-1 uppercase font-bold">{{ $message }}</div> @enderror
                 </div>
                 <div>
                     <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Movement</label>
-                    <select name="movement_type" class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 outline-none transition-all">
-                        <option value="Automatic">Automatic</option>
-                        <option value="Manual">Manual</option>
-                        <option value="Quartz">Quartz</option>
+                    <select name="movement_type" required class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 outline-none transition-all">
+                        <option value="Automatic" {{ old('movement_type') == 'Automatic' ? 'selected' : '' }}>Automatic</option>
+                        <option value="Manual" {{ old('movement_type') == 'Manual' ? 'selected' : '' }}>Manual</option>
+                        <option value="Quartz" {{ old('movement_type') == 'Quartz' ? 'selected' : '' }}>Quartz</option>
                     </select>
+                    @error('movement_type') <div class="text-red-600 text-xs mt-1 uppercase font-bold">{{ $message }}</div> @enderror
                 </div>
             </div>
 
@@ -102,15 +95,16 @@
                     <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Retail Price</label>
                     <div class="relative">
                         <span class="absolute left-5 top-4 text-yellow-400 font-bold">$</span>
-                        <input type="number" name="price" step="0.01" value="{{ old('price') }}" placeholder="0.00"
+                        <input type="number" name="price" step="0.01" value="{{ old('price') }}" placeholder="0.00" required
                             class="w-full pl-10 pr-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 outline-none transition-all font-mono">
                     </div>
                     @error('price') <div class="text-red-600 text-xs mt-1 uppercase font-bold">{{ $message }}</div> @enderror
                 </div>
                 <div>
                     <label class="block text-[10px] font-black text-zinc-500 mb-2 uppercase tracking-[0.2em]">Water Resistance</label>
-                    <input type="text" name="water_resistance" value="{{ old('water_resistance', '100M') }}"
+                    <input type="text" name="water_resistance" value="{{ old('water_resistance', '100M') }}" required
                         class="w-full px-5 py-4 rounded-none border border-zinc-800 bg-black text-white focus:ring-1 focus:ring-yellow-400 outline-none transition-all font-mono">
+                    @error('water_resistance') <div class="text-red-600 text-xs mt-1 uppercase font-bold">{{ $message }}</div> @enderror
                 </div>
             </div>
         </div>
@@ -126,7 +120,7 @@
                     </div>
                     <p class="text-[10px] text-white font-black uppercase tracking-widest">Upload Master Image</p>
                 </div>
-                <input type="file" name="image_url" class="absolute inset-0 opacity-0 cursor-pointer" />
+                <input type="file" name="image_url" accept="image/*" required class="absolute inset-0 opacity-0 cursor-pointer" />
             </div>
             @error('image_url') <div class="text-red-600 text-xs mt-1 uppercase font-bold">{{ $message }}</div> @enderror
         </div>

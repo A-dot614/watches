@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Watch;
 use App\Http\Requests\StoreWatchImageRequest;
 use App\Http\Requests\UpdateWatchImageRequest;
 use App\Models\WatchImage;
