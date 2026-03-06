@@ -1,5 +1,5 @@
 <x-layouts.adminlayout>
-    <div class="p-8 bg-stone-950 min-h-screen">
+    <div class="p-8 bg-stone-950 h-auto min-h-screen overflow-y-auto">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-white/5 pb-8">
             <div>
                 <h2 class="text-xs uppercase tracking-[0.6em] text-amber-500 mb-2">Inventory Management</h2>
