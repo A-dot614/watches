@@ -14,6 +14,7 @@ public function home()
 
     public function detail(Watch $okatia)
     {
+        $allWatches = Watch::all();
         return view('site.detail', compact('okatia'));
     }
     

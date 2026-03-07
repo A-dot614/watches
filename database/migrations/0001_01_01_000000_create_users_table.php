@@ -17,8 +17,17 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['buy', 'admin'])->default('buy'); // Add role column with default value
             $table->rememberToken();
             $table->timestamps();
+        });
+
+       Schema::table('users', function (Blueprint $table) {
+              $table->boolean('is_admin')->default(false);
+        });
+     
+        Schema::table('users', function (Blueprint $table) {
+              $table->boolean('is_buyer')->default(false);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

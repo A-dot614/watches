@@ -6,6 +6,10 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
+    // ===============================
+    // admin side
+    // =============================== 
+
     public function dashboard(){
         return view("admin.dashboard");
     }
@@ -16,6 +20,7 @@ class AdminController extends Controller
     }    
 
     public function adminDetail(Watch $okatia){
+        $allWatches = Watch::all();
         return view("admin.watches.detail", compact('okatia'));
     } 
 
@@ -69,4 +74,27 @@ class AdminController extends Controller
 
         return redirect()->route('card')->with("success","Watch created successfully!");       
     }
+
+    // ===============================
+    // buy side
+    // ===============================
+
+
+
+    public function purchase(){
+        $allWatches = Watch::all();
+        return view("admin.buy.purchase",compact('allWatches'));
+    }
+
+    public function buyDetail(Watch $okatia){
+         $allWatches = Watch::all();
+        return view("admin.buy.detail", compact('okatia'));
+    }
+    
+    public function buyIndex(){
+        return view("admin.buy.dashboard");
+    }
+
+
+
 }
